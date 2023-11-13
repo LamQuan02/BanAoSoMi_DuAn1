@@ -13,7 +13,7 @@ public class HoaDon {
     private String MaSp;
     private int SoLuong;
     private int GiaTien;
-    private String MaVoucher;
+    private int MaVoucher;
     private String TrangThai;
     private String GhiChu;
 
@@ -30,7 +30,7 @@ public class HoaDon {
     
     
 
-    public HoaDon(int MaHD, int MaHDCT, String TenKH, Date NgayLap, String MaNv, int TongTien, String MaSp, int SoLuong, int GiaTien, String MaVoucher, String TrangThai, String GhiChu) {
+    public HoaDon(int MaHD, int MaHDCT, String TenKH, Date NgayLap, String MaNv, int TongTien, String MaSp, int SoLuong, int GiaTien, int MaVoucher, String TrangThai, String GhiChu) {
         this.MaHD = MaHD;
         this.MaHDCT = MaHDCT;
         this.TenKH = TenKH;
@@ -117,11 +117,11 @@ public class HoaDon {
         this.GiaTien = GiaTien;
     }
 
-    public String getMaVoucher() {
+    public int getMaVoucher() {
         return MaVoucher;
     }
 
-    public void setMaVoucher(String MaVoucher) {
+    public void setMaVoucher(int MaVoucher) {
         this.MaVoucher = MaVoucher;
     }
 

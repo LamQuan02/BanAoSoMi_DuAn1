@@ -24,6 +24,41 @@ public class HoaDonService extends DAO<HoaDon, Integer>{
     public void delete(Integer key) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+    public List<HoaDon> getAllHD(){
+        String SQL ="""
+                      select a.*, b.MaHDCT,b.MaSP,b.SoLuong, b.GiaTien, b.MaVoucher, b.TrangThai, b.GhiChu 
+                                            from HoaDon a join HoaDonChiTiet b 
+                                            on a.MaHD=b.MaHD""";
+        List<HoaDon> list = new ArrayList<>();
+        
+        Connection conn = null;
+        try {
+            conn = Getconnection.getConnection();
+            PreparedStatement sttm = conn.prepareStatement(SQL);
+            ResultSet rs = sttm.executeQuery();
+            while(rs.next()){
+                HoaDon hd = new HoaDon();
+                hd.setMaHD(rs.getInt("MaHD"));
+                hd.setTenKH(rs.getString("TenKH"));
+                hd.setNgayLap(rs.getDate("NgayLap"));
+                hd.setMaNv(rs.getString("MaNV"));
+                hd.setTongTien(rs.getInt("TongTien"));
+                hd.setMaHDCT(rs.getInt("MaHDCT"));
+                hd.setMaSp(rs.getString("MaSP"));
+                hd.setSoLuong(rs.getInt("SoLuong"));
+                hd.setGiaTien(rs.getInt("GiaTien"));
+                hd.setMaVoucher(rs.getInt("MaVoucher"));
+                hd.setTrangThai(rs.getString("TrangThai"));
+                hd.setGhiChu(rs.getString("GhiChu"));
+                list.add(hd);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     @Override
     public List<HoaDon> selectAll() {
