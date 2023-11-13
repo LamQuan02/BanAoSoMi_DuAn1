@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Vourcher {
 
-    private int MaVourcher;
+    private int MaVoucher;
     private String TenVoucher;
     private Date NgayBatDau;
     private Date NgayKetThuc;
@@ -14,8 +14,8 @@ public class Vourcher {
     public Vourcher() {
     }
 
-    public Vourcher(int MaVourcher, String TenVoucher, Date NgayBatDau, Date NgayKetThuc, int GiamGia, String TrangThai) {
-        this.MaVourcher = MaVourcher;
+    public Vourcher(int MaVoucher, String TenVoucher, Date NgayBatDau, Date NgayKetThuc, int GiamGia, String TrangThai) {
+        this.MaVoucher = MaVoucher;
         this.TenVoucher = TenVoucher;
         this.NgayBatDau = NgayBatDau;
         this.NgayKetThuc = NgayKetThuc;
@@ -24,11 +24,11 @@ public class Vourcher {
     }
 
     public int getMaVourcher() {
-        return MaVourcher;
+        return MaVoucher;
     }
 
     public void setMaVourcher(int MaVourcher) {
-        this.MaVourcher = MaVourcher;
+        this.MaVoucher = MaVourcher;
     }
 
     public String getTenVoucher() {
@@ -69,6 +69,11 @@ public class Vourcher {
 
     public void setTrangThai(String TrangThai) {
         this.TrangThai = TrangThai;
+    }
+
+    @Override
+    public String toString() {
+        return "Vourcher{" + "TenVoucher=" + TenVoucher + ", GiamGia=" + GiamGia + '}';
     }
 
 }

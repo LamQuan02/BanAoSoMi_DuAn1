@@ -20,6 +20,16 @@ public class HoaDon {
     public HoaDon() {
     }
 
+    public HoaDon(int MaHD, String TenKH, Date NgayLap, String MaNv, int TongTien) {
+        this.MaHD = MaHD;
+        this.TenKH = TenKH;
+        this.NgayLap = NgayLap;
+        this.MaNv = MaNv;
+        this.TongTien = TongTien;
+    }
+    
+    
+
     public HoaDon(int MaHD, int MaHDCT, String TenKH, Date NgayLap, String MaNv, int TongTien, String MaSp, int SoLuong, int GiaTien, String MaVoucher, String TrangThai, String GhiChu) {
         this.MaHD = MaHD;
         this.MaHDCT = MaHDCT;
