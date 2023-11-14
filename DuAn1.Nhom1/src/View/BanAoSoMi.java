@@ -39,7 +39,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
 //        URL urlIconLogo = BanAoSoMi.class.getClassLoader().getResource("Image/Logo.jpg");
 //        Image img = Toolkit.getDefaultToolkit().createImage(urlIconLogo);
 //        this.setIconImage(img);
-       initHD();
+        initHD();
     }
 // 500/180
 
@@ -1208,13 +1208,11 @@ public class BanAoSoMi extends javax.swing.JFrame {
     private void tblSPCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSPCTMouseClicked
         int row = tblSPCT.getSelectedRow();
         loadsp(row);
-        closeMenu();
     }//GEN-LAST:event_tblSPCTMouseClicked
 
     private void tblTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTaiKhoanMouseClicked
         int row = tblTaiKhoan.getSelectedRow();
         loadtk(row);
-        closeMenu();
     }//GEN-LAST:event_tblTaiKhoanMouseClicked
 
     private void txtThemTaiKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtThemTaiKActionPerformed
@@ -1858,8 +1856,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
         List<SanPham> list = new ArrayList<>();
         SanPham row = new SanPham();
         list.add(row);
-        
-        
+
     }
 
     void fillTableDSSP(List<SanPham> list) {
