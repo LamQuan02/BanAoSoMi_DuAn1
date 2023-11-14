@@ -15,6 +15,7 @@ import java.awt.*;
 //import java.awt.event.ActionEvent;
 //import java.awt.event.ActionListener;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 //import java.math.BigDecimal;
@@ -134,6 +135,9 @@ public class BanAoSoMi extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         txtMaHD = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
+        btnXoaSPGH = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        txtTimkiem = new javax.swing.JTextField();
         voucher = new javax.swing.JPanel();
         taikhoan = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -651,7 +655,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã SP", "Tên SP", "Size", "Giá"
+                "Mã SP", "Tên SP", "Size", "Giá", "Số Lượng", "Tổng Tiền"
             }
         ));
         jScrollPane4.setViewportView(tblGioHang);
@@ -801,25 +805,40 @@ public class BanAoSoMi extends javax.swing.JFrame {
         jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel28.setText("Hóa Đơn");
 
+        btnXoaSPGH.setText("Xóa");
+
+        jButton1.setText("Tìm");
+
         javax.swing.GroupLayout hoadonLayout = new javax.swing.GroupLayout(hoadon);
         hoadon.setLayout(hoadonLayout);
         hoadonLayout.setHorizontalGroup(
             hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(hoadonLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
                 .addGroup(hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(hoadonLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
                         .addGroup(hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)
-                            .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, hoadonLayout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addGap(146, 146, 146)
+                                    .addComponent(txtTimkiem)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jButton1))
+                                .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE))
                     .addGroup(hoadonLayout.createSequentialGroup()
-                        .addGap(218, 218, 218)
-                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(231, 231, 231))
+                    .addGroup(hoadonLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnXoaSPGH)
+                        .addGap(95, 95, 95)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -827,20 +846,33 @@ public class BanAoSoMi extends javax.swing.JFrame {
             hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(hoadonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(jLabel7)
+                .addGroup(hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(hoadonLayout.createSequentialGroup()
+                        .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8)
+                .addGroup(hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(hoadonLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel8))
+                    .addComponent(btnXoaSPGH))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(hoadonLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(hoadonLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(txtTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)))
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -1269,11 +1301,13 @@ public class BanAoSoMi extends javax.swing.JFrame {
     private javax.swing.JButton btnTim1;
     private javax.swing.JButton btnXoa;
     private javax.swing.JButton btnXoa1;
+    private javax.swing.JButton btnXoaSPGH;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboVoucher;
     private javax.swing.JPanel container;
     private javax.swing.JPanel hoadon;
     private javax.swing.JPanel home;
+    private javax.swing.JButton jButton1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1362,6 +1396,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
     private javax.swing.JTextField txtTim1;
     private javax.swing.JTextField txtTimTK;
     private javax.swing.JButton txtTimTaiK;
+    private javax.swing.JTextField txtTimkiem;
     private javax.swing.JButton txtXoaTaiK;
     private javax.swing.JPanel voucher;
     // End of variables declaration//GEN-END:variables
@@ -1817,6 +1852,14 @@ public class BanAoSoMi extends javax.swing.JFrame {
             Object[] row = {hd.getMaHD(), hd.getTenKH(), hd.getNgayLap(), hd.getMaNv(), hd.getTongTien()};
             model.addRow(row);
         }
+    }
+
+    void fillTableGiaoHang() {
+        List<SanPham> list = new ArrayList<>();
+        SanPham row = new SanPham();
+        list.add(row);
+        
+        
     }
 
     void fillTableDSSP(List<SanPham> list) {
