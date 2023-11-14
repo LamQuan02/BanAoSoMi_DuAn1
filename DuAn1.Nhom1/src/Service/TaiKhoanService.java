@@ -2,6 +2,7 @@ package Service;
 
 import Model.TaiKhoan;
 import Repository.Getconnection;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class TaiKhoanService {
                         """;
 
     String selectById = """
-                    SELECT [HoTen]
+                    SELECT [MaNV],[HoTen]
                            ,[MatKhau]
                            ,[VaiTro]
                     FROM TaiKhoan 
@@ -60,14 +61,14 @@ public class TaiKhoanService {
     protected List<TaiKhoan> selectBySqltk(String sql, Object... args) {
         List<TaiKhoan> list = new ArrayList<>();
         try {
-            var rs = Getconnection.query(sql, args);
+            ResultSet rs = Getconnection.query(sql, args);
             while (rs.next()) {
-                var hv = new TaiKhoan();
-                hv.setMaNv(rs.getString("MaNV"));
-                hv.setHoTen(rs.getString("HoTen"));
-                hv.setMatKhau(rs.getString("MatKhau"));
-                hv.setVaiTro(rs.getBoolean("VaiTro"));
-                list.add(hv);
+                TaiKhoan nv = new TaiKhoan();
+                nv.setMaNv(rs.getString("MaNV"));
+                nv.setHoTen(rs.getString("HoTen"));
+                nv.setMatKhau(rs.getString("MatKhau"));
+                nv.setVaiTro(rs.getBoolean("VaiTro"));
+                list.add(nv);
             }
             rs.getStatement().getConnection().close();
             return list;
