@@ -35,11 +35,11 @@ public class BanAoSoMi extends javax.swing.JFrame {
         Tablesp();
         Tabletk();
         this.setTitle("7Clothes");
-
-        URL urlIconLogo = BanAoSoMi.class.getClassLoader().getResource("Image/Logo.jpg");
-        Image img = Toolkit.getDefaultToolkit().createImage(urlIconLogo);
-        this.setIconImage(img);
-        initHD();
+//comemt
+//        URL urlIconLogo = BanAoSoMi.class.getClassLoader().getResource("Image/Logo.jpg");
+//        Image img = Toolkit.getDefaultToolkit().createImage(urlIconLogo);
+//        this.setIconImage(img);
+       initHD();
     }
 // 500/180
 
