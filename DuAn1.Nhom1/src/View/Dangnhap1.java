@@ -317,28 +317,36 @@ public class Dangnhap1 extends javax.swing.JDialog {
         }
     }
 
-    public String layMaNhanVien() {
-        String maNV = null;
-        // Thực hiện đăng nhập và lấy MaNV sau khi đăng nhập thành công
-        // Ví dụ: Kiểm tra thông tin đăng nhập và xác thực từ cơ sở dữ liệu
-        if (kiemTraDangNhap()) { // Phương thức kiểm tra thông tin đăng nhập
-            maNV = layMaNVTuCoSoDuLieu(); // Phương thức lấy MaNV từ cơ sở dữ liệu
-        }
-        return maNV; // Trả về MaNV sau khi lấy thành công
-    }
-
     private boolean kiemTraDangNhap() {
         // Code để kiểm tra thông tin đăng nhập
         // Trả về true nếu đăng nhập thành công, ngược lại trả về false
+        // Đây là nơi bạn thực hiện kiểm tra thông tin đăng nhập, ví dụ như xác thực từ cơ sở dữ liệu
+        // Ví dụ:
+        // Nếu thông tin đăng nhập hợp lệ:
+        // return true;
+        // Ngược lại:
+        // return false;
         return true; // Hoặc return false;
     }
 
+    // Phương thức lấy MaNV từ cơ sở dữ liệu
     private String layMaNVTuCoSoDuLieu() {
         String maNV = null;
         // Code để truy vấn cơ sở dữ liệu và lấy MaNV
         // Ví dụ: Kết nối và truy vấn cơ sở dữ liệu để lấy MaNV
         // Sau khi lấy được MaNV, gán vào biến maNV
+        // Ví dụ:
+        // maNV = "NV123"; // Giả sử MaNV lấy từ cơ sở dữ liệu là "NV123"
         return maNV; // Trả về MaNV sau khi lấy thành công
     }
 
+    // Gọi phương thức lấy MaNV khi cần thiết (ví dụ khi người dùng đăng nhập thành công)
+    public String layMaNhanVien() {
+        String maNV = null;
+        // Thực hiện đăng nhập và lấy MaNV sau khi đăng nhập thành công
+        if (kiemTraDangNhap()) { // Gọi phương thức kiểm tra thông tin đăng nhập
+            maNV = layMaNVTuCoSoDuLieu(); // Gọi phương thức lấy MaNV từ cơ sở dữ liệu
+        }
+        return maNV; // Trả về MaNV sau khi lấy thành công
+    }
 }

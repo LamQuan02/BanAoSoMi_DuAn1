@@ -326,7 +326,7 @@
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jTabbedPane1" alignment="0" pref="466" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -1150,15 +1150,16 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
                                       <Component id="btnThanhToan" linkSize="1" min="-2" pref="104" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="btnHuy" linkSize="1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jButton3" min="-2" pref="108" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="jLabel20" max="32767" attributes="0"/>
                                           <Component id="jLabel18" pref="96" max="32767" attributes="0"/>
@@ -1166,8 +1167,9 @@
                                           <Component id="jLabel24" alignment="1" max="32767" attributes="0"/>
                                           <Component id="jLabel25" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jLabel26" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="jLabel27" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="lblTienTraLai" alignment="1" max="32767" attributes="0"/>
                                           <Component id="jLabel29" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="jLabel23" alignment="1" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -1175,10 +1177,11 @@
                                           <Component id="txtMaNV" max="32767" attributes="0"/>
                                           <Component id="txtNgayLap" max="32767" attributes="0"/>
                                           <Component id="cboVoucher" alignment="0" pref="249" max="32767" attributes="0"/>
-                                          <Component id="lblTongTien" min="-2" pref="39" max="-2" attributes="0"/>
                                           <Component id="txtTienKhachDua" max="32767" attributes="0"/>
-                                          <Component id="lblTienTraKhach" min="-2" pref="39" max="-2" attributes="0"/>
                                           <Component id="txtMaHD" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="txtSDT" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="lblTienTraKhach" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                                          <Component id="lblTongTien" alignment="0" min="-2" pref="134" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1209,7 +1212,12 @@
                                   <Component id="txtNgayLap" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtSDT" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="cboVoucher" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1226,13 +1234,14 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel27" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTienTraLai" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblTienTraKhach" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="83" max="32767" attributes="0"/>
+                              <EmptySpace pref="80" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="btnThanhToan" linkSize="2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                                   <Component id="btnHuy" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButton3" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           </Group>
@@ -1279,6 +1288,9 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Thanh To&#xe1;n"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThanhToanActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="btnHuy">
                       <Properties>
@@ -1325,10 +1337,11 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="txtTienKhachDua">
                       <Events>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtTienKhachDuaFocusLost"/>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTienKhachDuaActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel27">
+                    <Component class="javax.swing.JLabel" name="lblTienTraLai">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Ti&#x1ec1;n tr&#x1ea3; Kh&#xe1;ch"/>
                       </Properties>
@@ -1346,6 +1359,21 @@
                     <Component class="javax.swing.JTextField" name="txtMaHD">
                       <Properties>
                         <Property name="enabled" type="boolean" value="false"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel23">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="txtSDT">
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton3">
+                      <Properties>
+                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="ff" green="66" red="33" type="rgb"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="T&#x1ea1;o h&#xf3;a &#x111;&#x1a1;n"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -1485,6 +1513,17 @@
               </Layout>
               <SubComponents>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                  <Properties>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                        <TitledBorder title="Danh s&#xe1;ch t&#xe0;i kho&#x1ea3;n">
+                          <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
+                            <BevelBorder/>
+                          </Border>
+                        </TitledBorder>
+                      </Border>
+                    </Property>
+                  </Properties>
                   <AuxValues>
                     <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
                   </AuxValues>

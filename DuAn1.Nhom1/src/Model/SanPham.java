@@ -17,6 +17,12 @@ public class SanPham {
         return GiamGia;
     }
 
+    public SanPham(String Size, int Gia, int GiamGia) {
+        this.Size = Size;
+        this.Gia = Gia;
+        this.GiamGia = GiamGia;
+    }
+
     public void setGiamGia(int GiamGia) {
         this.GiamGia = GiamGia;
     }

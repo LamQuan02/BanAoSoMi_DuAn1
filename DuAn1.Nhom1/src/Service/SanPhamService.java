@@ -2,6 +2,7 @@ package Service;
 
 import Model.SanPham;
 import Repository.Getconnection;
+import java.awt.image.SampleModel;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -220,23 +221,26 @@ public class SanPhamService {
         }
     }
 
-    public int getGiaByMaSP(String maSP) {
-        int gia = 0; // Giá trị mặc định nếu không tìm thấy hoặc có lỗi
+    public SanPham getGiaByMaSP(String maSP) {
+        SanPham giaSanPham = new SanPham(); // Tạo đối tượng GiaSanPham để lưu thông tin
+
         try {
             Connection connection = Getconnection.getConnection(); // Lấy kết nối đến cơ sở dữ liệu của bạn
 
-            // Chuẩn bị truy vấn SQL để lấy giá từ bảng sản phẩm dựa trên mã sản phẩm
-            String query = "SELECT Gia FROM SanPhamChiTiet WHERE MaSP = ?";
+            // Chuẩn bị truy vấn SQL để lấy thông tin từ bảng sản phẩm dựa trên mã sản phẩm
+            String query = "SELECT Gia, SIZE, GiamGia FROM GioHang_View WHERE MaSP = ?";
             PreparedStatement pstmt = connection.prepareStatement(query);
             pstmt.setString(1, maSP);
 
             // Thực thi truy vấn và lấy kết quả
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                gia = rs.getInt("Gia"); // Lấy giá từ kết quả truy vấn
+                giaSanPham.setGia(rs.getInt("Gia"));
+                giaSanPham.setSize(rs.getString("SIZE"));
+                giaSanPham.setGiamGia(rs.getInt("GiamGia"));
             }
 
-            // Đóng các đối tượng ResultSet, PreparedStatement và kết nối
+            // Đóng các đSối tượng ResultSet, PreparedStatement và kết nối
             rs.close();
             pstmt.close();
             connection.close();
@@ -244,7 +248,8 @@ public class SanPhamService {
         } catch (SQLException e) {
             e.printStackTrace(); // Xử lý hoặc báo lỗi nếu có vấn đề trong quá trình truy vấn
         }
-        return gia; // Trả về giá của sản phẩm có mã maSP
+
+        return giaSanPham; // Trả về đối tượng GiaSanPham chứa thông tin về giá, size và giảm giá của sản phẩm
     }
 
 }
