@@ -272,4 +272,8 @@ private void init() {
             System.exit(0);
         }
     }
+
+    boolean isLoginSuccessful() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

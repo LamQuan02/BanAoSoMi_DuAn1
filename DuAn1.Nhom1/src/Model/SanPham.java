@@ -13,6 +13,24 @@ public class SanPham {
     private int Gia;
     private int Sale;
 
+    public int getGiamGia() {
+        return GiamGia;
+    }
+
+    public void setGiamGia(int GiamGia) {
+        this.GiamGia = GiamGia;
+    }
+    private int GiamGia;
+    private int ThanhTien;
+
+    public int getThanhTien() {
+        return ThanhTien;
+    }
+
+    public void setThanhTien(int ThanhTien) {
+        this.ThanhTien = ThanhTien;
+    }
+    
     public SanPham() {
     }
 

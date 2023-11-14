@@ -184,5 +184,67 @@ public class SanPhamService {
         String sql = "SELECT * FROM SanPhamChiTiet WHERE MaSPCT = ? OR MaSP = ?";
         return selectBySql1(sql, maSPCT, maSPCT);
     }
+//////////////////////////////////////////////////////
+
+    private final String select_by_maSP = """
+        SELECT * FROM GioHang_View WHERE MaSP = ?
+        """;
+
+    public SanPham getItemDetails(String maSP) {
+        List<SanPham> list = selectBySqlGioHangView(select_by_maSP, maSP);
+        if (!list.isEmpty()) {
+            return list.get(0); // Trả về sản phẩm đầu tiên trong danh sách (nếu có)
+        }
+        return null; // Trả về null nếu không tìm thấy sản phẩm
+    }
+
+    protected List<SanPham> selectBySqlGioHangView(String sql, Object... args) {
+        List<SanPham> list = new ArrayList<>();
+        try {
+            var rs = Getconnection.query(sql, args);
+            while (rs.next()) {
+                var item = new SanPham();
+                item.setMaSp(rs.getString("MaSP"));
+                item.setTenSp(rs.getString("TenSP"));
+                item.setSize(rs.getString("SIZE"));
+                item.setSoLuong(rs.getInt("SoLuong"));
+                item.setGia(rs.getInt("Gia"));
+                item.setSale(rs.getInt("GiamGia"));
+                item.setThanhTien(rs.getInt("ThanhTien"));
+                list.add(item);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int getGiaByMaSP(String maSP) {
+        int gia = 0; // Giá trị mặc định nếu không tìm thấy hoặc có lỗi
+        try {
+            Connection connection = Getconnection.getConnection(); // Lấy kết nối đến cơ sở dữ liệu của bạn
+
+            // Chuẩn bị truy vấn SQL để lấy giá từ bảng sản phẩm dựa trên mã sản phẩm
+            String query = "SELECT Gia FROM SanPhamChiTiet WHERE MaSP = ?";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, maSP);
+
+            // Thực thi truy vấn và lấy kết quả
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                gia = rs.getInt("Gia"); // Lấy giá từ kết quả truy vấn
+            }
+
+            // Đóng các đối tượng ResultSet, PreparedStatement và kết nối
+            rs.close();
+            pstmt.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Xử lý hoặc báo lỗi nếu có vấn đề trong quá trình truy vấn
+        }
+        return gia; // Trả về giá của sản phẩm có mã maSP
+    }
 
 }
