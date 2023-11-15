@@ -12,7 +12,7 @@ public class Getconnection {
         dataSource.setEncrypt(Boolean.FALSE);;
         dataSource.setServerName("localhost"); // Đặt tên máy chủ SQL Server của bạn ở đây
         dataSource.setPortNumber(1433); // Cổng mặc định cho SQL Server
-        dataSource.setDatabaseName("DuAn1");
+        dataSource.setDatabaseName("DuAn11");
 
         return dataSource.getConnection();
     }

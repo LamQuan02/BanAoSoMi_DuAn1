@@ -14,23 +14,29 @@ public class HoaDon {
     private int SoLuong;
     private int GiaTien;
     private int MaVoucher;
-    private String TrangThai;
+    private Boolean TrangThai;
     private String GhiChu;
+    private String HinhThucTT;
+
+    public String getHinhThucTT() {
+        return HinhThucTT;
+    }
+
+    public void setHinhThucTT(String HinhThucTT) {
+        this.HinhThucTT = HinhThucTT;
+    }
 
     public HoaDon() {
     }
 
-    public HoaDon(int MaHD, String TenKH, Date NgayLap, String MaNv, int TongTien) {
+    public HoaDon(int MaHD, Date NgayLap, String MaNv, Boolean TrangThai) {
         this.MaHD = MaHD;
-        this.TenKH = TenKH;
         this.NgayLap = NgayLap;
         this.MaNv = MaNv;
-        this.TongTien = TongTien;
+        this.TrangThai = TrangThai;
     }
-    
-    
 
-    public HoaDon(int MaHD, int MaHDCT, String TenKH, Date NgayLap, String MaNv, int TongTien, String MaSp, int SoLuong, int GiaTien, int MaVoucher, String TrangThai, String GhiChu) {
+    public HoaDon(int MaHD, int MaHDCT, String TenKH, Date NgayLap, String MaNv, int TongTien, String MaSp, int SoLuong, int GiaTien, int MaVoucher, Boolean TrangThai, String GhiChu) {
         this.MaHD = MaHD;
         this.MaHDCT = MaHDCT;
         this.TenKH = TenKH;
@@ -125,11 +131,11 @@ public class HoaDon {
         this.MaVoucher = MaVoucher;
     }
 
-    public String getTrangThai() {
+    public Boolean getTrangThai() {
         return TrangThai;
     }
 
-    public void setTrangThai(String TrangThai) {
+    public void setTrangThai(Boolean TrangThai) {
         this.TrangThai = TrangThai;
     }
 
@@ -141,4 +147,77 @@ public class HoaDon {
         this.GhiChu = GhiChu;
     }
 
+    private String TenSp;
+    private String Size;
+    private String MoTa;
+    private String MaSPCT;
+    private String MauSac;
+    private String ChatLieu;
+    private int Gia;
+    private int Sale;
+
+    public String getTenSp() {
+        return TenSp;
+    }
+
+    public void setTenSp(String TenSp) {
+        this.TenSp = TenSp;
+    }
+
+    public String getSize() {
+        return Size;
+    }
+
+    public void setSize(String Size) {
+        this.Size = Size;
+    }
+
+    public String getMoTa() {
+        return MoTa;
+    }
+
+    public void setMoTa(String MoTa) {
+        this.MoTa = MoTa;
+    }
+
+    public String getMaSPCT() {
+        return MaSPCT;
+    }
+
+    public void setMaSPCT(String MaSPCT) {
+        this.MaSPCT = MaSPCT;
+    }
+
+    public String getMauSac() {
+        return MauSac;
+    }
+
+    public void setMauSac(String MauSac) {
+        this.MauSac = MauSac;
+    }
+
+    public String getChatLieu() {
+        return ChatLieu;
+    }
+
+    public void setChatLieu(String ChatLieu) {
+        this.ChatLieu = ChatLieu;
+    }
+
+    public int getGia() {
+        return Gia;
+    }
+
+    public void setGia(int Gia) {
+        this.Gia = Gia;
+    }
+
+    public int getSale() {
+        return Sale;
+    }
+
+    public void setSale(int Sale) {
+        this.Sale = Sale;
+    }
+    
 }

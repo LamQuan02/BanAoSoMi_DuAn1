@@ -251,5 +251,82 @@ public class SanPhamService {
 
         return giaSanPham; // Trả về đối tượng GiaSanPham chứa thông tin về giá, size và giảm giá của sản phẩm
     }
+////////////////////////////////////////  JPANEL hoadon
+
+    public void updateSoLuong(String maSP, int newQuantity) {
+        try {
+            String update_sqlSP = "UPDATE SanPhamChiTiet SET SoLuong = ? WHERE MaSP = ?";
+            PreparedStatement ps = Getconnection.getConnection().prepareStatement(update_sqlSP);
+            ps.setInt(1, newQuantity);
+            ps.setString(2, maSP);
+
+            ps.executeUpdate();
+
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ khi cập nhật số lượng sản phẩm
+        }
+    }
+
+    public int getSoLuongByMaSP(String maSP) {
+        int soLuong = 0;
+        try {
+            String query = "SELECT SoLuong FROM SanPhamChiTiet WHERE MaSP = ?";
+            PreparedStatement ps = Getconnection.getConnection().prepareStatement(query);
+            ps.setString(1, maSP);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                soLuong = rs.getInt("SoLuong");
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ khi truy vấn dữ liệu số lượng sản phẩm
+        }
+        return soLuong;
+    }
+///////////////////////////////////////////////////////////////////////////
+
+    public List<SanPham> laySanPhamTheoMaHD(int maHD) {
+        List<SanPham> productList = new ArrayList<>();
+
+        try {
+            // Prepare SQL query to fetch products based on Invoice ID from HoaDonChiTiet table
+            String query = "SELECT sp.MaSP, sp.TenSP, hdct.SoLuong, spct.Gia, spct.SALE, hdct.GiaTien "
+                    + "FROM SanPham sp\n"
+                    + "INNER JOIN HoaDonChiTiet hdct ON sp.MaSP = hdct.MaSP\n"
+                    + "INNER JOIN SanPhamChiTiet spct ON spct.MaSP = sp.MaSP\n"
+                    + "WHERE hdct.MaHD = ?";
+
+            // Get a connection and execute the query
+            PreparedStatement pstmt = Getconnection.getConnection().prepareStatement(query);
+            pstmt.setInt(1, maHD);
+            ResultSet rs = pstmt.executeQuery();
+
+            // Process the results and populate the productList
+            while (rs.next()) {
+                SanPham product = new SanPham();
+                product.setMaSp(rs.getString("MaSP"));
+                product.setTenSp(rs.getString("TenSP"));
+                product.setSoLuong(rs.getInt("SoLuong"));
+                product.setGia(rs.getInt("Gia"));
+                product.setSale(rs.getInt("SALE"));
+                product.setThanhTien(rs.getInt("GiaTien"));
+                productList.add(product);
+            }
+
+            // Close resources
+            rs.close();
+            pstmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle exceptions or errors if any occur during the process
+        }
+
+        return productList;
+    }
 
 }
