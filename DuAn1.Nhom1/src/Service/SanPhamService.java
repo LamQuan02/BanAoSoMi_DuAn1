@@ -21,15 +21,6 @@ public class SanPhamService {
         DELETE FROM SanPham
         WHERE MaSP = ?
     """;
-    String insert_sql = """
-                        INSERT INTO [dbo].[SanPham]
-                                              ([MaSP]
-                                              ,[TenSP]
-                                              ,[SIZE]
-                                              ,[MoTa])
-                             VALUES
-                                   (?,?,?,?)
-                        """;
 
     String selectById = """
                     SELECT [TenSP]
@@ -74,6 +65,16 @@ public class SanPhamService {
                     FROM SanPhamChiTiet 
                     WHERE MaSPCT = ?
                     """;
+
+    String insert_sql = """
+                        INSERT INTO [dbo].[SanPham]
+                                              ([MaSP]
+                                              ,[TenSP]
+                                              ,[SIZE]
+                                              ,[MoTa])
+                             VALUES
+                                   (?,?,?,?)
+                        """;
 
     public void insert(SanPham entity) {
         Getconnection.update(insert_sql,
