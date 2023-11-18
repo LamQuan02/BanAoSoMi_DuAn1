@@ -8,11 +8,11 @@ public class Getconnection {
     public static Connection getConnection() throws SQLException {
         SQLServerDataSource dataSource = new SQLServerDataSource();
         dataSource.setUser("sa");
-        dataSource.setPassword("123456");
+        dataSource.setPassword("0941216003Avg1@");
         dataSource.setEncrypt(Boolean.FALSE);;
         dataSource.setServerName("localhost"); // Đặt tên máy chủ SQL Server của bạn ở đây
         dataSource.setPortNumber(1433); // Cổng mặc định cho SQL Server
-        dataSource.setDatabaseName("DuAn11");
+        dataSource.setDatabaseName("DuAn1");
 
         return dataSource.getConnection();
     }
@@ -65,5 +65,7 @@ public class Getconnection {
     public static void close(Connection connection) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    public static void main(String[] args) throws SQLException {
+        System.out.println(getConnection());
+    }
 }
