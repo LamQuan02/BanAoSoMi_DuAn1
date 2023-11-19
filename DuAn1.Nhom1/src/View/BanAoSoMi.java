@@ -33,13 +33,16 @@ import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-
+import Service.VoucherService;
+import service.impl.VourcherServiceImpl;
 public class BanAoSoMi extends javax.swing.JFrame {
 
     SanPhamService dao = new SanPhamService();
     TaiKhoanService tk = new TaiKhoanService();
     HoaDonService hd = new HoaDonService();
-
+    private DefaultTableModel dtm;
+    private List<Vourcher> list = new ArrayList<Vourcher>();
+    private VoucherService sv = new VourcherServiceImpl();
     public BanAoSoMi() {
         initComponents();
         Table();
@@ -47,7 +50,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
         Tabletk();
         fillTableLICHSU(listAll);
         this.setTitle("7Clothes");
-
+        dtm = (DefaultTableModel) tblVoucher.getModel();
         URL urlIconLogo = BanAoSoMi.class.getClassLoader().getResource("Image/Logo.jpg");
         Image img = Toolkit.getDefaultToolkit().createImage(urlIconLogo);
         this.setIconImage(img);
@@ -55,6 +58,8 @@ public class BanAoSoMi extends javax.swing.JFrame {
         txtNgayLap.setText(XDate.toString(XDate.now(), "dd-MM-yyyy"));
         txtMaNV.setEditable(false);
         moDialogDangNhap();
+        list = sv.getAll();
+        showData(list);
         //////////////////// HINH THUC THANH TOAN 
         cboHinhThucThanhToan.addItemListener(new ItemListener() {
             @Override
@@ -171,6 +176,30 @@ public class BanAoSoMi extends javax.swing.JFrame {
         txtTimkiem = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         voucher = new javax.swing.JPanel();
+        voucher1 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        tblVoucher = new javax.swing.JTable();
+        jButton6 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        lblTextMa = new javax.swing.JLabel();
+        txtTen = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        txtGiamGia = new javax.swing.JTextField();
+        rdoCon = new javax.swing.JRadioButton();
+        rdoHet = new javax.swing.JRadioButton();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel37 = new javax.swing.JLabel();
+        txtNgayBatDau = new javax.swing.JTextField();
+        txtNgayKetThuc = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
         taikhoan = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblTaiKhoan = new javax.swing.JTable();
@@ -1077,15 +1106,228 @@ public class BanAoSoMi extends javax.swing.JFrame {
 
         home.add(hoadon, "card4");
 
+        jButton4.setText("Sửa");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Xóa");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        tblVoucher.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã Voucher", "Tên KM", "Ngày bắt đầu", "Ngày kết thúc", "Giảm giá", "Trạng thái"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblVoucher.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVoucherMouseClicked(evt);
+            }
+        });
+        jScrollPane13.setViewportView(tblVoucher);
+
+        jButton6.setText("Làm mới");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel32.setText("Tạo danh sách Voucher");
+
+        jLabel33.setText("Mã Voucher :");
+
+        jLabel34.setText("Tên khuyến mãi");
+
+        jLabel35.setText("Giảm giá");
+
+        lblTextMa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        jLabel36.setText("Trạng thái");
+
+        rdoCon.setText("Còn");
+
+        rdoHet.setText("Hết sử dụng");
+
+        jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel37.setText("Thời gian sử dụng");
+
+        jLabel38.setText("Ngày bắt đầu");
+
+        jLabel39.setText("Ngày kết thúc");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel37)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel38)
+                        .addComponent(jLabel39)
+                        .addComponent(txtNgayBatDau, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                        .addComponent(txtNgayKetThuc)))
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel37)
+                .addGap(58, 58, 58)
+                .addComponent(jLabel38)
+                .addGap(18, 18, 18)
+                .addComponent(txtNgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel39)
+                .addGap(18, 18, 18)
+                .addComponent(txtNgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(138, 138, 138))
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(rdoCon)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdoHet))
+                    .addComponent(jLabel35)
+                    .addComponent(jLabel36)
+                    .addComponent(jLabel34)
+                    .addComponent(jLabel32)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel33)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblTextMa))
+                    .addComponent(txtGiamGia, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                    .addComponent(txtTen))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 300, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel32)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTextMa)
+                            .addComponent(jLabel33))
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel34)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel35)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtGiamGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel36)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rdoCon)
+                            .addComponent(rdoHet))
+                        .addGap(0, 23, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        jButton7.setText("Thêm");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout voucher1Layout = new javax.swing.GroupLayout(voucher1);
+        voucher1.setLayout(voucher1Layout);
+        voucher1Layout.setHorizontalGroup(
+            voucher1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(voucher1Layout.createSequentialGroup()
+                .addGroup(voucher1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(voucher1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton7)
+                        .addGap(63, 63, 63)
+                        .addComponent(jButton4)
+                        .addGap(51, 51, 51)
+                        .addComponent(jButton5)
+                        .addGap(66, 66, 66)
+                        .addComponent(jButton6))
+                    .addGroup(voucher1Layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(7, Short.MAX_VALUE))
+        );
+        voucher1Layout.setVerticalGroup(
+            voucher1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, voucher1Layout.createSequentialGroup()
+                .addGroup(voucher1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, voucher1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(voucher1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(voucher1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton4)
+                        .addComponent(jButton5)
+                        .addComponent(jButton6))
+                    .addComponent(jButton7))
+                .addGap(201, 201, 201))
+        );
+
         javax.swing.GroupLayout voucherLayout = new javax.swing.GroupLayout(voucher);
         voucher.setLayout(voucherLayout);
         voucherLayout.setHorizontalGroup(
             voucherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1073, Short.MAX_VALUE)
+            .addGroup(voucherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(voucherLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(voucher1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         voucherLayout.setVerticalGroup(
             voucherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 466, Short.MAX_VALUE)
+            .addGroup(voucherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(voucherLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(voucher1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         home.add(voucher, "card5");
@@ -1845,6 +2087,70 @@ public class BanAoSoMi extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tblLichSMouseClicked
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        int check = JOptionPane.YES_OPTION;
+        if (check != JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa không ?", "Sửa", JOptionPane.YES_NO_OPTION)) {
+            return;
+        } else {
+            int row = tblVoucher.getSelectedRow();
+            if (row < 0) {
+                JOptionPane.showMessageDialog(this, "Không có dòng nào để sửa");
+                JOptionPane.showMessageDialog(this, "Sửa thất bại");
+            } else {
+                String id = tblVoucher.getValueAt(row, 0).toString();
+                JOptionPane.showMessageDialog(this, sv.updateVoucher(id, getData()));
+                list = sv.getAll();
+                showData(list);
+                clearForm();
+            }
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        int check = JOptionPane.YES_OPTION;
+        if (check != JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không ?", "Xóa", JOptionPane.YES_NO_OPTION)) {
+            return;
+        } else {
+            int row = tblVoucher.getSelectedRow();
+            if (row < 0) {
+                JOptionPane.showMessageDialog(this, "Không có dòng nào để xóa");
+                JOptionPane.showMessageDialog(this, "Xóa thất bại");
+            } else {
+                String id = tblVoucher.getValueAt(row, 0).toString();
+                JOptionPane.showMessageDialog(this, sv.deleteVoucher(id));
+                list = sv.getAll();
+                showData(list);
+                clearForm();
+            }
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void tblVoucherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVoucherMouseClicked
+        // TODO add your handling code here:
+        int index = tblVoucher.getSelectedRow();
+        fillData(list.get(index));
+    }//GEN-LAST:event_tblVoucherMouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        clearForm();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        int check = JOptionPane.YES_OPTION;
+        if (check != JOptionPane.showConfirmDialog(this, "Bạn có muốn thêm không ?", "Thêm", JOptionPane.YES_NO_OPTION)) {
+            return;
+        } else {
+            JOptionPane.showMessageDialog(this, sv.addVoucher(getData()));
+            list = sv.getAll();
+            showData(list);
+            clearForm();
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1890,6 +2196,10 @@ public class BanAoSoMi extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1916,6 +2226,14 @@ public class BanAoSoMi extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1926,10 +2244,13 @@ public class BanAoSoMi extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1939,6 +2260,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblTextMa;
     private javax.swing.JLabel lblTienTraKhach;
     private javax.swing.JLabel lblTienTraLai;
     private javax.swing.JLabel lblTongTien;
@@ -1953,6 +2275,8 @@ public class BanAoSoMi extends javax.swing.JFrame {
     private javax.swing.JLabel mnThoat;
     private javax.swing.JLabel mnVC;
     private javax.swing.JPanel nhanvien;
+    private javax.swing.JRadioButton rdoCon;
+    private javax.swing.JRadioButton rdoHet;
     private javax.swing.JRadioButton rdoNV;
     private javax.swing.JRadioButton rdoQL;
     private javax.swing.JPanel sanpham;
@@ -1967,12 +2291,14 @@ public class BanAoSoMi extends javax.swing.JFrame {
     private javax.swing.JTable tblSPCT;
     private javax.swing.JTable tblSanPhamLichSu;
     private javax.swing.JTable tblTaiKhoan;
+    private javax.swing.JTable tblVoucher;
     private javax.swing.JPanel thongke;
     private javax.swing.JTextField txtChatLieu;
     private javax.swing.JTextArea txtGhiChuLS;
     private javax.swing.JTextArea txtGhichu;
     private javax.swing.JTextField txtGia;
     private javax.swing.JTextField txtGiaTienLS;
+    private javax.swing.JTextField txtGiamGia;
     private javax.swing.JTextField txtHinhThucTTLS;
     private javax.swing.JTextField txtHoTenTk;
     private javax.swing.JButton txtLoadTaiK;
@@ -1986,12 +2312,15 @@ public class BanAoSoMi extends javax.swing.JFrame {
     private javax.swing.JTextField txtMatableCT;
     private javax.swing.JTextField txtMauSac;
     private javax.swing.JTextArea txtMota;
+    private javax.swing.JTextField txtNgayBatDau;
+    private javax.swing.JTextField txtNgayKetThuc;
     private javax.swing.JTextField txtNgayLap;
     private javax.swing.JTextField txtNgayLapLS;
     private javax.swing.JTextField txtSale;
     private javax.swing.JTextField txtSoL;
     private javax.swing.JButton txtSuaTaiK;
     private javax.swing.JTextField txtSze;
+    private javax.swing.JTextField txtTen;
     private javax.swing.JTextField txtTenKHLS;
     private javax.swing.JTextField txtTenKhachHang;
     private javax.swing.JTextField txtTenSp;
@@ -2005,6 +2334,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
     private javax.swing.JTextField txtTrangThaiLS;
     private javax.swing.JButton txtXoaTaiK;
     private javax.swing.JPanel voucher;
+    private javax.swing.JPanel voucher1;
     // End of variables declaration//GEN-END:variables
 
     int width = 200;
@@ -2044,6 +2374,76 @@ public class BanAoSoMi extends javax.swing.JFrame {
         }).start();
 
     }
+// VOUCHER
+      private void showData(List<Vourcher> list) {
+        dtm.setRowCount(0);
+        for (Vourcher vc : list) {
+            dtm.addRow(new Object[]{
+                vc.getMaVourcher(),
+                vc.getTenVoucher(),
+                vc.getNgayBatDau(),
+                vc.getNgayKetThuc(),
+                vc.getGiamGia(),
+                vc.getTrangThai()?"Còn":"Hết"
+            });
+        }
+    }
+
+    private void fillData(Vourcher vc) {
+        txtTen.setText(vc.getTenVoucher());
+        txtGiamGia.setText(vc.getGiamGia() + "");
+        txtNgayBatDau.setText(vc.getNgayBatDau() + "");
+        txtNgayKetThuc.setText(vc.getNgayKetThuc() + "");
+        lblTextMa.setText(vc.getMaVourcher()+ "");
+        if (vc.getTrangThai()) {
+            rdoCon.setSelected(true);
+        } else {
+            rdoHet.setSelected(true);
+        }
+    }
+
+    private void clearForm() {
+        txtTen.setText("");
+        txtGiamGia.setText("");
+        txtNgayBatDau.setText("");
+        txtNgayKetThuc.setText("");
+        buttonGroup1.clearSelection();
+        lblTextMa.setText("");
+    }
+
+    private Vourcher getData() {
+        String tenKM = txtTen.getText().trim();
+        String ngayBatDau = txtNgayBatDau.getText().trim();
+        String ngayKetThuc = txtNgayKetThuc.getText().trim();
+        String giamGia = txtGiamGia.getText().trim();
+        Boolean trangThai = rdoCon.isSelected();
+        if (tenKM.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Không được bỏ trống tên KM");
+            txtTen.requestFocus();
+            return null;
+        }
+        if (giamGia.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Không được bỏ trống giảm giá");
+            txtGiamGia.requestFocus();
+            return null;
+        }
+        if (ngayBatDau.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Không được bỏ trống ngày bắt đầu");
+            txtNgayBatDau.requestFocus();
+            return null;
+        }
+        if (ngayKetThuc.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Không được bỏ trống ngày kết thúc");
+            txtNgayKetThuc.requestFocus();
+            return null;
+        }
+        java.sql.Date ngayBatDauNew = java.sql.Date.valueOf(ngayBatDau);
+        java.sql.Date ngayKetThucNew = java.sql.Date.valueOf(ngayKetThuc);
+        int giamGiaValue = Integer.parseInt(giamGia);
+        // Create Voucher object
+        Vourcher vc = new Vourcher( tenKM, ngayBatDauNew, ngayKetThucNew, giamGiaValue, trangThai);
+        return vc;
+    }
 // san pham 
 
     private SanPham getForm() {
@@ -2060,11 +2460,6 @@ public class BanAoSoMi extends javax.swing.JFrame {
         txtTenSp.setText(cd.getTenSp());
         txtSze.setText(cd.getSize());
         txtMota.setText(cd.getMoTa());
-    }
-
-    private void clearForm() {
-        SanPham sp = new SanPham();
-        this.setForm(sp);
     }
 
     public void load(int row) {

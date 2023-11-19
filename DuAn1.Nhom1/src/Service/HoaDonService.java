@@ -88,7 +88,7 @@ public class HoaDonService extends DAO<HoaDon, Integer> {
     }
 
     public List<SanPham> DSSanPham() {
-        String SQL = "select sp.MaSP, sp.TenSP, spct.MauSac,spct.ChatLieu,sp.SIZE,spct.SoLuong, spct.Gia from SanPham sp join SanPhamChiTiet spct on sp.MaSP= spct.MaSP";
+        String SQL = "select sp.MaSP, sp.TenSP, spct.MauSac,spct.ChatLieu,spct.Size,spct.SoLuong, spct.Gia from SanPham sp join SanPhamChiTiet spct on sp.MaSP= spct.MaSP";
         List<SanPham> list = new ArrayList<>();
         Connection conn = null;
         try {

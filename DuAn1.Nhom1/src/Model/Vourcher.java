@@ -9,12 +9,12 @@ public class Vourcher {
     private Date NgayBatDau;
     private Date NgayKetThuc;
     private int GiamGia;
-    private String TrangThai;
+    private Boolean TrangThai;
 
     public Vourcher() {
     }
 
-    public Vourcher(int MaVoucher, String TenVoucher, Date NgayBatDau, Date NgayKetThuc, int GiamGia, String TrangThai) {
+    public Vourcher(int MaVoucher, String TenVoucher, Date NgayBatDau, Date NgayKetThuc, int GiamGia, Boolean TrangThai) {
         this.MaVoucher = MaVoucher;
         this.TenVoucher = TenVoucher;
         this.NgayBatDau = NgayBatDau;
@@ -22,6 +22,15 @@ public class Vourcher {
         this.GiamGia = GiamGia;
         this.TrangThai = TrangThai;
     }
+     public Vourcher( String TenVoucher, Date NgayBatDau, Date NgayKetThuc, int GiamGia, Boolean TrangThai) {
+        this.TenVoucher = TenVoucher;
+        this.NgayBatDau = NgayBatDau;
+        this.NgayKetThuc = NgayKetThuc;
+        this.GiamGia = GiamGia;
+        this.TrangThai = TrangThai;
+    }
+
+
 
     public int getMaVourcher() {
         return MaVoucher;
@@ -63,13 +72,23 @@ public class Vourcher {
         this.GiamGia = GiamGia;
     }
 
-    public String getTrangThai() {
+    public int getMaVoucher() {
+        return MaVoucher;
+    }
+
+    public void setMaVoucher(int MaVoucher) {
+        this.MaVoucher = MaVoucher;
+    }
+
+    public Boolean getTrangThai() {
         return TrangThai;
     }
 
-    public void setTrangThai(String TrangThai) {
+    public void setTrangThai(Boolean TrangThai) {
         this.TrangThai = TrangThai;
     }
+
+
 
     @Override
     public String toString() {

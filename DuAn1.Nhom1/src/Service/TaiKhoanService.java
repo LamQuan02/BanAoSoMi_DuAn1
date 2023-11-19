@@ -13,7 +13,7 @@ public class TaiKhoanService {
 """;
     private final String update_sql = """
         UPDATE TaiKhoan
-        SET HoTen = ?, MatKhau = ?, VaiTro = ?
+        SET  MatKhau = ?, VaiTro = ?
         WHERE MaNV = ?
     """;
     private final String delete_sql = """
@@ -22,20 +22,15 @@ public class TaiKhoanService {
     """;
     String insert_sql = """
                         INSERT INTO [dbo].[TaiKhoan]
-                                              ([MaNV]
-                                              ,[HoTen]
+                                              ([MaNV],
                                               ,[MatKhau]
                                               ,[VaiTro])
                              VALUES
-                                   (?,?,?,?)
+                                   (?,?,?)
                         """;
 
     String selectById = """
-                    SELECT [MaNV],[HoTen]
-                           ,[MatKhau]
-                           ,[VaiTro]
-                    FROM TaiKhoan 
-                    WHERE MaNV = ?
+                    SELECT * FROM TaiKhoan where MaNV = ?
                     """;
 
     public void inserttk(TaiKhoan entity) {
@@ -65,7 +60,6 @@ public class TaiKhoanService {
             while (rs.next()) {
                 TaiKhoan nv = new TaiKhoan();
                 nv.setMaNv(rs.getString("MaNV"));
-                nv.setHoTen(rs.getString("HoTen"));
                 nv.setMatKhau(rs.getString("MatKhau"));
                 nv.setVaiTro(rs.getBoolean("VaiTro"));
                 list.add(nv);

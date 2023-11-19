@@ -103,7 +103,6 @@ public class SanPhamService {
                 var hv = new SanPham();
                 hv.setMaSp(rs.getString("MaSP"));
                 hv.setTenSp(rs.getString("TenSP"));
-                hv.setSize(rs.getString("SIZE"));
                 hv.setMoTa(rs.getString("MoTa"));
                 list.add(hv);
             }
@@ -163,7 +162,7 @@ public class SanPhamService {
                 hv.setChatLieu(rs.getString("ChatLieu"));
                 hv.setSoLuong(rs.getInt("SoLuong"));
                 hv.setGia(rs.getInt("Gia"));
-                hv.setSale(rs.getInt("SALE"));
+                hv.setSale(rs.getInt("KhuyenMai"));
                 list.add(hv);
             }
             rs.getStatement().getConnection().close();
