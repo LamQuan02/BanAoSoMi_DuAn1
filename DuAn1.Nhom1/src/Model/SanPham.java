@@ -12,6 +12,15 @@ public class SanPham {
     private int SoLuong;
     private int Gia;
     private int Sale;
+    private String Loai;
+
+    public String getLoai() {
+        return Loai;
+    }
+
+    public void setLoai(String Loai) {
+        this.Loai = Loai;
+    }
 
     public int getGiamGia() {
         return GiamGia;
@@ -36,7 +45,7 @@ public class SanPham {
     public void setThanhTien(int ThanhTien) {
         this.ThanhTien = ThanhTien;
     }
-    
+
     public SanPham() {
     }
 
@@ -131,6 +140,79 @@ public class SanPham {
 
     public void setSale(int Sale) {
         this.Sale = Sale;
+    }
+
+    private String TenMau;
+    private String TenLoai;
+    private String TenChatLieu;
+    private String TenSize;
+    private int ID;
+    private int IDMAU;
+    private int IDSIZE;
+    private int IDLOAI;
+
+    public int getIDMAU() {
+        return IDMAU;
+    }
+
+    public void setIDMAU(int IDMAU) {
+        this.IDMAU = IDMAU;
+    }
+
+    public int getIDSIZE() {
+        return IDSIZE;
+    }
+
+    public void setIDSIZE(int IDSIZE) {
+        this.IDSIZE = IDSIZE;
+    }
+
+    public int getIDLOAI() {
+        return IDLOAI;
+    }
+
+    public void setIDLOAI(int IDLOAI) {
+        this.IDLOAI = IDLOAI;
+    }
+
+    public String getTenMau() {
+        return TenMau;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public void setTenMau(String TenMau) {
+        this.TenMau = TenMau;
+    }
+
+    public String getTenLoai() {
+        return TenLoai;
+    }
+
+    public void setTenLoai(String TenLoai) {
+        this.TenLoai = TenLoai;
+    }
+
+    public String getTenChatLieu() {
+        return TenChatLieu;
+    }
+
+    public void setTenChatLieu(String TenChatLieu) {
+        this.TenChatLieu = TenChatLieu;
+    }
+
+    public String getTenSize() {
+        return TenSize;
+    }
+
+    public void setTenSize(String TenSize) {
+        this.TenSize = TenSize;
     }
 
 }

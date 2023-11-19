@@ -88,7 +88,12 @@ public class HoaDonService extends DAO<HoaDon, Integer> {
     }
 
     public List<SanPham> DSSanPham() {
-        String SQL = "select sp.MaSP, sp.TenSP, spct.MauSac,spct.ChatLieu,sp.SIZE,spct.SoLuong, spct.Gia from SanPham sp join SanPhamChiTiet spct on sp.MaSP= spct.MaSP";
+        String SQL = "SELECT sp.MaSP, sp.TenSP, ms.TenMau AS TenMau, cl.TenChatLieu AS TenChatLieu, sz.MaSIZE, spct.SoLuong, spct.Gia "
+                + "FROM SanPham sp "
+                + "JOIN SanPhamChiTiet spct ON sp.MaSP = spct.MaSP "
+                + "JOIN MauSac ms ON spct.MauSac = ms.ID "
+                + "JOIN ChatLieu cl ON spct.ChatLieu = cl.ID "
+                + "JOIN SIZE sz ON spct.Size = sz.ID";
         List<SanPham> list = new ArrayList<>();
         Connection conn = null;
         try {
@@ -99,9 +104,9 @@ public class HoaDonService extends DAO<HoaDon, Integer> {
                 SanPham sp = new SanPham();
                 sp.setMaSp(rs.getString("MaSP"));
                 sp.setTenSp(rs.getString("TenSP"));
-                sp.setMauSac(rs.getString("MauSac"));
-                sp.setChatLieu(rs.getString("ChatLieu"));
-                sp.setSize(rs.getString("SIZE"));
+                sp.setMauSac(rs.getString("TenMau"));
+                sp.setChatLieu(rs.getString("TenChatLieu"));
+                sp.setSize(rs.getString("MaSIZE"));
                 sp.setSoLuong(rs.getInt("SoLuong"));
                 sp.setGia(rs.getInt("Gia"));
                 list.add(sp);
@@ -109,6 +114,14 @@ public class HoaDonService extends DAO<HoaDon, Integer> {
             return list;
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return null;
     }
@@ -256,14 +269,49 @@ public class HoaDonService extends DAO<HoaDon, Integer> {
     ////////////////////////////////////////////////////////////////////////////////////// LỊCH SỬ
 
     public HoaDon layThongTinHoaDonTheoMaHD(int maHD) {
-        String sql = "SELECT HD.MaNV, HDCT.TenKH, MAX(HDCT.GiaTien) AS GiaTien, HD.NgayLap, HD.TrangThai, HDCT.HinhThucTT, HDCT.GhiChu\n"
+        String sql = "SELECT HD.MaNV, HDCT.TenKH, HD.NgayLap, HD.TrangThai, HDCT.HinhThucTT, HDCT.GhiChu, HDCT.GiaTien\n"
                 + "FROM HoaDon HD\n"
                 + "INNER JOIN HoaDonChiTiet HDCT ON HD.MaHD = HDCT.MaHD\n"
                 + "WHERE HD.MaHD = ?\n"
-                + "GROUP BY HD.MaNV, HDCT.TenKH, HD.NgayLap, HD.TrangThai, HDCT.HinhThucTT, HDCT.GhiChu;";
+                + "GROUP BY HD.MaNV, HDCT.TenKH, HD.NgayLap, HD.TrangThai, HDCT.HinhThucTT, HDCT.GhiChu, HDCT.GiaTien;";
 
         List<HoaDon> hoaDons = selectBySqlLS(sql, maHD);
-        return hoaDons.isEmpty() ? null : hoaDons.get(0);
+
+        // Tính tổng giá tiền của tất cả sản phẩm trong hóa đơn
+        int tongGiaTien = tinhTongGiaTienHoaDon(maHD); // Hàm tính tổng giá tiền
+
+        if (!hoaDons.isEmpty()) {
+            HoaDon hoaDon = hoaDons.get(0);
+            hoaDon.setGiaTien(tongGiaTien); // Set giá trị tổng giá tiền vào đối tượng HoaDon
+            return hoaDon;
+        }
+        return null;
+    }
+
+    private int tinhTongGiaTienHoaDon(int maHD) {
+        String sqlTongGiaTien = "SELECT SUM(GiaTien) AS TongGiaTien FROM HoaDonChiTiet WHERE MaHD = ?";
+        int tongGiaTien = 0;
+        Connection conn = null;
+        try {
+            conn = Getconnection.getConnection();
+            PreparedStatement sttm = conn.prepareStatement(sqlTongGiaTien);
+            sttm.setInt(1, maHD);
+            ResultSet rs = sttm.executeQuery();
+            if (rs.next()) {
+                tongGiaTien = rs.getInt("TongGiaTien");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return tongGiaTien;
     }
 
     protected List<HoaDon> selectBySqlLS(String sql, Object... args) {
@@ -304,8 +352,8 @@ public class HoaDonService extends DAO<HoaDon, Integer> {
         }
         return null;
     }
-    
-      public Map<Integer, HoaDon> mergeByMaHD(List<HoaDon> list) {
+
+    public Map<Integer, HoaDon> mergeByMaHD(List<HoaDon> list) {
         Map<Integer, HoaDon> mergedMap = new HashMap<>();
 
         for (HoaDon hd : list) {

@@ -13,7 +13,7 @@ public class TaiKhoanService {
 """;
     private final String update_sql = """
         UPDATE TaiKhoan
-        SET HoTen = ?, MatKhau = ?, VaiTro = ?
+        SET  MatKhau = ?, VaiTro = ?
         WHERE MaNV = ?
     """;
     private final String delete_sql = """
@@ -23,15 +23,14 @@ public class TaiKhoanService {
     String insert_sql = """
                         INSERT INTO [dbo].[TaiKhoan]
                                               ([MaNV]
-                                              ,[HoTen]
                                               ,[MatKhau]
                                               ,[VaiTro])
                              VALUES
-                                   (?,?,?,?)
+                                   (?,?,?)
                         """;
 
     String selectById = """
-                    SELECT [MaNV],[HoTen]
+                    SELECT [MaNV]
                            ,[MatKhau]
                            ,[VaiTro]
                     FROM TaiKhoan 
@@ -40,7 +39,7 @@ public class TaiKhoanService {
 
     public void inserttk(TaiKhoan entity) {
         Getconnection.update(insert_sql,
-                entity.getMaNv(), entity.getHoTen(),
+                entity.getMaNv(), 
                 entity.getMatKhau(), (entity.getVaiTro() != null) ? entity.getVaiTro() : false);
     }
 
@@ -50,7 +49,7 @@ public class TaiKhoanService {
 
     public void updatetk(TaiKhoan entity) {
         Getconnection.update(update_sql,
-                entity.getHoTen(), entity.getMatKhau(), (entity.getVaiTro() != null) ? entity.getVaiTro() : false,
+                 entity.getMatKhau(), (entity.getVaiTro() != null) ? entity.getVaiTro() : false,
                 entity.getMaNv());
     }
 
@@ -65,7 +64,6 @@ public class TaiKhoanService {
             while (rs.next()) {
                 TaiKhoan nv = new TaiKhoan();
                 nv.setMaNv(rs.getString("MaNV"));
-                nv.setHoTen(rs.getString("HoTen"));
                 nv.setMatKhau(rs.getString("MatKhau"));
                 nv.setVaiTro(rs.getBoolean("VaiTro"));
                 list.add(nv);
