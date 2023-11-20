@@ -915,7 +915,7 @@ public class SanPhamService {
 
         try ( Connection connection = Getconnection.getConnection();  PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-            pstmt.setString(1, entity.getTenMau());
+            pstmt.setString(1, entity.getTenSize());
             pstmt.setInt(2, entity.getID());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -965,11 +965,55 @@ public class SanPhamService {
 
         try ( Connection connection = Getconnection.getConnection();  PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-            pstmt.setString(1, entity.getTenMau());
+            pstmt.setString(1, entity.getTenLoai());
             pstmt.setInt(2, entity.getID());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    
+    public List<SanPham> selectAllCTSPDT() {
+        List<SanPham> sanPhams = new ArrayList<>();
+
+        try {
+            Connection connection = Getconnection.getConnection();
+            String selectAllQuery = "SELECT sp.MaSP, sp.TenSP, l.TenLoai AS Loai, "
+                    + "ms.TenMau AS MauSac, "
+                    + "s.MaSize AS Size, cl.TenChatLieu AS ChatLieu,spct.SoLuong "
+                    + "FROM SanPham sp "
+                    + "INNER JOIN SanPhamChiTiet spct ON sp.MaSP = spct.MaSP "
+                    + "INNER JOIN MauSac ms ON spct.MauSac = ms.ID "
+                    + "INNER JOIN ChatLieu cl ON spct.ChatLieu = cl.ID "
+                    + "INNER JOIN SIZE s ON spct.Size = s.ID "
+                    + "INNER JOIN LOAI l ON spct.Loai = l.ID";
+
+            PreparedStatement pstmt = connection.prepareStatement(selectAllQuery);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                SanPham sanPham = new SanPham();
+                sanPham.setMaSp(rs.getString("MaSP"));
+                sanPham.setTenSp(rs.getString("TenSP"));
+                sanPham.setLoai(rs.getString("Loai"));
+                sanPham.setMauSac(rs.getString("MauSac"));
+                sanPham.setSize(rs.getString("Size"));
+                sanPham.setChatLieu(rs.getString("ChatLieu"));
+                sanPham.setSoLuong(rs.getInt("SoLuong"));
+
+                sanPhams.add(sanPham);
+            }
+
+            rs.close();
+            pstmt.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ hoặc thông báo lỗi nếu cần
+        }
+
+        return sanPhams;
+    }
+    
 }

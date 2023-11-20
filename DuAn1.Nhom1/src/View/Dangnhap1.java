@@ -291,7 +291,7 @@ public class Dangnhap1 extends javax.swing.JDialog {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                ketThuc(); // Gọi phương thức khi cửa sổ đóng
+                ketThuc(); // 
             }
         });
     }

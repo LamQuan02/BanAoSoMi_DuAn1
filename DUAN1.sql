@@ -1,9 +1,9 @@
-﻿     CREATE DATABASE DuAn1;
+﻿     CREATE DATABASE DuAn111;
      GO
-     USE DuAn1;
+     USE DuAn111;
      GO
 
- --DROP DATABASE DuAn1
+ --DROP DATABASE DuAn111
 
     CREATE TABLE  NhanVien
     (
@@ -24,14 +24,10 @@
         FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
     );
 GO
---update TaiKhoan set MatKhau ='123' from TaiKhoan join NhanVien on 
-	--		TaiKhoan.MaNV= NhanVien.MaNV where NhanVien.Email = 'tranxuanhoanh13@gmail.com'
-select * from TaiKhoan
-select Email from nhanvien
-go
+
 CREATE TABLE KhuyenMai
 (
-    Ma INT IDENTITY(1,1) PRIMARY KEY,
+    MaKM INT IDENTITY(1,1) PRIMARY KEY,
     TenKM NVARCHAR(25),
     NgayBatDau DATE,
     NgayKetThuc DATE,
@@ -47,18 +43,22 @@ GO
         TenMau NVARCHAR(20) 
     );
 GO
+
     CREATE TABLE ChatLieu
     (
         ID INT IDENTITY(1,1) PRIMARY KEY,
         TenChatLieu NVARCHAR(10)
     );
 GO
+
     CREATE TABLE SIZE
     (
         ID INT IDENTITY(1,1) PRIMARY KEY,
-        TenSize VARCHAR(3)
+        MaSIZE VARCHAR(3)
     );
 GO
+
+
     CREATE TABLE LOAI
     (
         ID INT IDENTITY(1,1) PRIMARY KEY,
@@ -66,20 +66,17 @@ GO
     );
 GO
 
---  a = mausac
-
---insert into a (tenmau) values('vang');
---insert into chatlieu(tenchatlieu) values('abc');
---insert into size(tensize) values('xs');
---insert into loai(tenloai) values('moi');
-
+UPDATE ChatLieu SET TenChatLieu = N'KAKI' WHERE ID = 4
+INSERT INTO ChatLieu (TenChatLieu) VALUES (N'Nỉ')
 --drop table sanpham
+
     CREATE TABLE SanPham
     (
         MaSP INT IDENTITY(1,1) PRIMARY KEY,
         TenSP NVARCHAR(50),        
         MoTa NVARCHAR(255)
     );
+	-- IsHidden BIT DEFAULT 0 // đánh dấu ẩn 
 GO
 --drop table SanPhamchitiet
     CREATE TABLE SanPhamChiTiet
@@ -98,19 +95,10 @@ GO
         FOREIGN KEY (ChatLieu) REFERENCES ChatLieu(ID),
         FOREIGN KEY (Size) REFERENCES SIZE(ID),
         FOREIGN KEY (Loai) REFERENCES LOAI(ID),
-		FOREIGN KEY (KhuyenMai) REFERENCES KhuyenMai(Ma)
+		FOREIGN KEY (KhuyenMai) REFERENCES KhuyenMai(MaKM)
 
     );
 GO
-
-
-
---SELECT a.masp,a.tensp,a.mota,b.maspct, c.TenMau, d.TenChatLieu, e.TenSize, f.TenLoai, b.SoLuong, b.KhuyenMai
---                                                FROM SanPham a join sanphamchitiet b on a.masp = b.masp 
---                                                join MauSac c on b.MauSac = c.ID
---                                                join ChatLieu d on b.ChatLieu = d.id
---                                                join Size e on b.Size= e.id
---                                                join Loai f on b.Loai= f.ID 
 
 
      CREATE TABLE HoaDon
@@ -143,8 +131,11 @@ SELECT * FROM HoaDon
 SELECT * FROM HoaDonChiTiet
 SELECT * FROM SanPham
 SELECT * FROM SanPhamChiTiet
-SELECT * FROM Voucher
-
+SELECT * FROM KhuyenMai
+SELECT * FROM MauSac
+SELECT * FROM ChatLieu
+SELECT * FROM LOAI
+SELECT * FROM SIZE
 INSERT INTO NhanVien(MaNV,HoTen,NgaySinh,DiaChi,Email)
 VALUES('NV001', N'Trần Xuân Hoành','2000-09-26','Ha Noi','tranxuanhoanh13@gmail.com'),
       ('NV002', N'Nguyễn Thị B','2003-01-01','Ha Noi','abc@gmail.com'),
@@ -153,7 +144,7 @@ VALUES('NV001', N'Trần Xuân Hoành','2000-09-26','Ha Noi','tranxuanhoanh13@gm
 
 
 INSERT INTO TaiKhoan (MaNV, MatKhau, VaiTro)
-VALUES ('NV001', 'aaa', 1),
+VALUES ('NV001', '', 1),
        ('NV002', '111', 0),
        ('NV003', '222', 1),
        ('NV004', '333', 0);
@@ -166,10 +157,10 @@ VALUES (N'Voucher1', '2023-11-01', '2023-11-30', 10, 1),
        (N'Voucher4', '2023-11-15', '2023-11-30', 5, 1),
        (N'Voucher5', '2023-12-15', '2023-12-31', 25, 1);
 
-INSERT INTO MauSac(TenMau)VALUES('Đỏ'),('Tím'),('Xanh'),('Trắng');
-INSERT INTO ChatLieu(TenChatLieu)VALUES('Cotton'),('Lụa'),('Bamboo');
-INSERT INTO SIZE(TenSize)VALUES('S'),('M'),('L'),('XL'),('XXL');
-INSERT INTO LOAI(TenLoai) VALUES('Basic'),('Tay ngắn'),('Cuban'),('Linen');
+INSERT INTO MauSac(TenMau)VALUES(N'Đỏ'),(N'Tím'),(N'Xanh'),(N'Trắng');
+INSERT INTO ChatLieu(TenChatLieu)VALUES('Cotton'),(N'Lụa'),('Bamboo');
+INSERT INTO SIZE(MaSize)VALUES('S'),('M'),('L'),('XL'),('XXL');
+INSERT INTO LOAI(TenLoai) VALUES(N'Basic'),(N'Tay ngắn'),(N'Cuban'),(N'Linen');
 
 INSERT INTO SanPham ( TenSP, MoTa)
 VALUES (N'Sản phẩm 1', N'Mô tả sản phẩm 1'),
@@ -199,13 +190,13 @@ go
 	   
 
 
-/*
 CREATE VIEW SanPham_View AS
 SELECT
    sp.MaSP AS MaSP_SanPham,
    sp.TenSP,
    spct.MauSac,
    spct.ChatLieu,
+   spct.Size,
    spct.SoLuong,
    spct.Gia
 FROM
@@ -220,7 +211,7 @@ CREATE VIEW GioHang_View AS
 SELECT
    spct.MaSP,
    sp.TenSP,
-
+   sz.MaSIZE,
    spct.SoLuong,
    spct.Gia AS Gia,
    (spct.Gia * spct.KhuyenMai) AS GiamGia,
@@ -228,10 +219,13 @@ SELECT
 FROM
    SanPham sp
 JOIN
-   SanPhamChiTiet spct ON sp.MaSP = spct.MaSP;
+   SanPhamChiTiet spct ON sp.MaSP = spct.MaSP
+JOIN
+   SIZE sz ON spct.Size = sz.ID;
+
 
 --	drop view GioHang_View
-	--SELECT SIZE FROM GioHang_View;
+	SELECT * FROM GioHang_View;
 
 
 	--UPDATE HoaDon SET  NgayLap = '2023-11-10', MaNV = 'NV004', TrangThai = 1  WHERE MaHD = 1
@@ -243,6 +237,34 @@ JOIN
 
 		SELECT * FROM HoaDon
 SELECT * FROM HoaDonChiTiet
-*/
 
 
+
+
+--SELECT a.masp,a.tensp,a.mota,b.maspct, c.TenMau, d.TenChatLieu, e.TenSize, f.TenLoai, b.SoLuong, b.KhuyenMai
+--                                                FROM SanPham a join sanphamchitiet b on a.masp = b.masp 
+--                                                join MauSac c on b.MauSac = c.ID
+--                                                join ChatLieu d on b.ChatLieu = d.id
+--                                                join Size e on b.Size= e.id
+--    
+--  a = mausac
+
+--insert into a (tenmau) values('vang');
+--insert into chatlieu(tenchatlieu) values('abc');
+--insert into size(tensize) values('xs');
+--insert into loai(tenloai) values('moi');
+--update TaiKhoan set MatKhau ='123' from TaiKhoan join NhanVien on 
+	--		TaiKhoan.MaNV= NhanVien.MaNV where NhanVien.Email = 'tranxuanhoanh13@gmail.com'
+select * from TaiKhoan
+select Email from nhanvien
+go
+
+
+
+SELECT sp.MaSP, sp.TenSP, l.TenLoai AS Loai , spct.Gia, spct.SoLuong,ms.TenMau AS MauSac,s.MaSize AS Size, cl.TenChatLieu AS ChatLieu
+FROM SanPham sp
+INNER JOIN SanPhamChiTiet spct ON sp.MaSP = spct.MaSP 
+INNER JOIN MauSac ms ON spct.MauSac = ms.ID 
+INNER JOIN ChatLieu cl ON spct.ChatLieu = cl.ID 
+INNER JOIN SIZE s ON spct.Size = s.ID
+INNER JOIN LOAI l ON spct.Loai = l.ID
