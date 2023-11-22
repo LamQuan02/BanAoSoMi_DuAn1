@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group/>
+=======
+        <group>
+            <file>file:/C:/Users/hoanh/OneDrive/Máy%20tính/duan1/BanAoSoMi_DuAn1/DuAn1.Nhom1/src/View/QuenMKJdialog.java</file>
+            <file>file:/C:/Users/hoanh/OneDrive/Máy%20tính/duan1/BanAoSoMi_DuAn1/DuAn1.Nhom1/src/View/DoiMatKhauJdialog.java</file>
+            <file>file:/C:/Users/hoanh/OneDrive/Máy%20tính/duan1/BanAoSoMi_DuAn1/DuAn1.Nhom1/src/View/BanAoSoMi.java</file>
+            <file>file:/C:/Users/hoanh/OneDrive/Máy%20tính/duan1/BanAoSoMi_DuAn1/DuAn1.Nhom1/src/Repository/XEmail.java</file>
+            <file>file:/C:/Users/hoanh/OneDrive/Máy%20tính/duan1/BanAoSoMi_DuAn1/DuAn1.Nhom1/src/Service/TaiKhoanService.java</file>
+            <file>file:/C:/Users/hoanh/OneDrive/Máy%20tính/duan1/BanAoSoMi_DuAn1/DuAn1.Nhom1/src/Service/QuenMatKhauService.java</file>
+        </group>
+>>>>>>> 868a223ed098f645ea4598d37452b661bd62ae27
     </open-files>
 </project-private>
