@@ -62,5 +62,123 @@ public class ThongKeService {
 
         return namList;
     }
+//////////////////////////////////////////// CÁC PANE TRÊN CÙNG //////////////////////////////////////////////////////////////
+//    SELECT DoanhThu
+//FROM DoanhThuThang
+//WHERE Nam = YEAR(GETDATE()) AND Thang = MONTH(GETDATE())
+
+    public List<Integer> getDoanhThuNam() {
+        List<Integer> doanhThuList = new ArrayList<>();
+
+        try {
+            Connection connection = Getconnection.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT DoanhThu FROM DoanhThuThang WHERE Nam = YEAR(GETDATE())");
+            while (rs.next()) {
+                doanhThuList.add(rs.getInt("DoanhThu"));
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return doanhThuList;
+    }
+
+    public List<Integer> getDoanhThuThang() {
+        List<Integer> doanhThuThang = new ArrayList<>();
+
+        try {
+            Connection connection = Getconnection.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT DoanhThu FROM DoanhThuThang WHERE Thang = MONTH(GETDATE())");
+            while (rs.next()) {
+                doanhThuThang.add(rs.getInt("DoanhThu"));
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return doanhThuThang;
+    }
+
+    public List<Integer> getSOHANGNAM() {
+        List<Integer> doanhThuThang = new ArrayList<>();
+
+        try {
+            Connection connection = Getconnection.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT SoLuongBan FROM DoanhThuThang WHERE Thang = MONTH(GETDATE())");
+            while (rs.next()) {
+                doanhThuThang.add(rs.getInt("SoLuongBan"));
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return doanhThuThang;
+    }
+
+    public List<Integer> getSOHANGTHANG() {
+        List<Integer> doanhThuThang = new ArrayList<>();
+
+        try {
+            Connection connection = Getconnection.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT SoLuongBan FROM DoanhThuThang WHERE Thang = MONTH(GETDATE())");
+            while (rs.next()) {
+                doanhThuThang.add(rs.getInt("SoLuongBan"));
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return doanhThuThang;
+    }
+
+    public List<Integer> getHOADONNAM() {
+        List<Integer> doanhThuThang = new ArrayList<>();
+
+        try {
+            Connection connection = Getconnection.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) AS SoHoaDon FROM HoaDon WHERE YEAR(NgayLap) = YEAR(GETDATE())");
+            while (rs.next()) {
+                doanhThuThang.add(rs.getInt("SoHoaDon"));
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return doanhThuThang;
+    }
+
+    public List<Integer> getHOADONTHANG() {
+        List<Integer> doanhThuThang = new ArrayList<>();
+
+        try {
+            Connection connection = Getconnection.getConnection();
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(*) AS SoHoaDon FROM HoaDon WHERE MONTH(NgayLap) = MONTH(GETDATE())");
+            while (rs.next()) {
+                doanhThuThang.add(rs.getInt("SoHoaDon"));
+            }
+            rs.close();
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return doanhThuThang;
+    }
 
 }

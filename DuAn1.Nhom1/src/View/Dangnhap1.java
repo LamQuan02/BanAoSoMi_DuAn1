@@ -13,6 +13,7 @@ import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.URL;
+import javax.swing.JFrame;
 
 /**
  *
@@ -53,7 +54,7 @@ public class Dangnhap1 extends javax.swing.JDialog {
         txtMaNV = new javax.swing.JTextField();
         txtMatKhau = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel6 = new javax.swing.JLabel();
+        lblQuenMK = new javax.swing.JLabel();
         lblDisable = new javax.swing.JLabel();
         lblShow = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -124,8 +125,13 @@ public class Dangnhap1 extends javax.swing.JDialog {
         jPanel1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 266, 287, 31));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 438, 341, -1));
 
-        jLabel6.setText("Quên mật khẩu ?");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 460, -1, -1));
+        lblQuenMK.setText("Quên mật khẩu ?");
+        lblQuenMK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblQuenMKMouseClicked(evt);
+            }
+        });
+        jPanel1.add(lblQuenMK, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 460, -1, -1));
 
         lblDisable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/8541830_eye_slash_icon (1).png"))); // NOI18N
         lblDisable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -226,6 +232,11 @@ public class Dangnhap1 extends javax.swing.JDialog {
         this.ketThuc();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void lblQuenMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMKMouseClicked
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_lblQuenMKMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -276,11 +287,11 @@ public class Dangnhap1 extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblDisable;
+    private javax.swing.JLabel lblQuenMK;
     private javax.swing.JLabel lblShow;
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JPasswordField txtMatKhau;
@@ -295,6 +306,8 @@ public class Dangnhap1 extends javax.swing.JDialog {
             }
         });
     }
+    
+    
     TaiKhoanService dao = new TaiKhoanService();
 
     private void dangNhap() {

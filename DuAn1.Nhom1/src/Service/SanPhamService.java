@@ -700,14 +700,14 @@ public class SanPhamService {
 
     public List<SanPham> laySanPhamTheoMaHD(int maHD) {
         List<SanPham> productList = new ArrayList<>();
-
         try {
             // Prepare SQL query to fetch products based on Invoice ID from HoaDonChiTiet table
-            String query = "SELECT sp.MaSP, sp.TenSP, hdct.SoLuong, spct.Gia, spct.KhuyenMai, hdct.GiaTien "
+            String query = "SELECT sp.MaSP, sp.TenSP, hdct.SoLuong, spct.Gia, km.GiamGia, hdct.GiaTien \n"
                     + "FROM SanPham sp\n"
                     + "INNER JOIN HoaDonChiTiet hdct ON sp.MaSP = hdct.MaSP\n"
                     + "INNER JOIN SanPhamChiTiet spct ON spct.MaSP = sp.MaSP\n"
-                    + "WHERE hdct.MaHD = ?";
+                    + "LEFT JOIN KhuyenMai km ON spct.KhuyenMai = km.MaKM\n"
+                    + "WHERE hdct.MaHD = ?;";
 
             // Get a connection and execute the query
             PreparedStatement pstmt = Getconnection.getConnection().prepareStatement(query);
@@ -721,7 +721,7 @@ public class SanPhamService {
                 product.setTenSp(rs.getString("TenSP"));
                 product.setSoLuong(rs.getInt("SoLuong"));
                 product.setGia(rs.getInt("Gia"));
-                product.setSale(rs.getInt("KhuyenMai"));
+                product.setSale(rs.getInt("GiamGia"));
                 product.setThanhTien(rs.getInt("GiaTien"));
                 productList.add(product);
             }
@@ -972,7 +972,7 @@ public class SanPhamService {
             e.printStackTrace();
         }
     }
-    
+
     public List<SanPham> selectAllCTSPDT() {
         List<SanPham> sanPhams = new ArrayList<>();
 
@@ -1015,5 +1015,98 @@ public class SanPhamService {
 
         return sanPhams;
     }
-    
+//////////////////////////////////////////////////////////////////////////////////
+
+    public List<SanPham> selectAll13(String loai) {
+        List<SanPham> sanPhams = new ArrayList<>();
+
+        try {
+            Connection connection = Getconnection.getConnection();
+            String selectAllQuery = "SELECT sp.MaSP, sp.TenSP, l.TenLoai AS Loai , spct.Gia, spct.SoLuong, "
+                    + "ms.TenMau AS MauSac, "
+                    + "s.MaSize AS Size, cl.TenChatLieu AS ChatLieu "
+                    + "FROM SanPham sp "
+                    + "INNER JOIN SanPhamChiTiet spct ON sp.MaSP = spct.MaSP "
+                    + "INNER JOIN MauSac ms ON spct.MauSac = ms.ID "
+                    + "INNER JOIN ChatLieu cl ON spct.ChatLieu = cl.ID "
+                    + "INNER JOIN SIZE s ON spct.Size = s.ID "
+                    + "INNER JOIN LOAI l ON spct.Loai = l.ID "
+                    + "WHERE l.TenLoai = ?"; // Sửa điều kiện WHERE để lọc theo loại sản phẩm
+
+            PreparedStatement pstmt = connection.prepareStatement(selectAllQuery);
+            pstmt.setString(1, loai); // Thiết lập giá trị cho tham số loại
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                SanPham sanPham = new SanPham();
+                sanPham.setMaSp(rs.getString("MaSP"));
+                sanPham.setTenSp(rs.getString("TenSP"));
+                sanPham.setLoai(rs.getString("Loai"));
+                sanPham.setGia(rs.getInt("Gia"));
+                sanPham.setSoLuong(rs.getInt("SoLuong"));
+                sanPham.setMauSac(rs.getString("MauSac"));
+                sanPham.setSize(rs.getString("Size"));
+                sanPham.setChatLieu(rs.getString("ChatLieu"));
+
+                sanPhams.add(sanPham);
+            }
+
+            rs.close();
+            pstmt.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ hoặc thông báo lỗi nếu cần
+        }
+
+        return sanPhams;
+    }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void updateSanPhamByMaKM(int loai, int maKM) {
+        String updateQuery = "UPDATE SanPhamChiTiet SET KhuyenMai = ? WHERE Loai = ?";
+        try ( Connection connection = Getconnection.getConnection();  PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
+
+            preparedStatement.setInt(1, loai);
+            preparedStatement.setInt(2, maKM);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Cập nhật dữ liệu thành công!");
+            } else {
+                System.out.println("Không có dữ liệu nào được cập nhật.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getLoaiID(String tenLoai) {
+        int loaiID = -1; // Giá trị mặc định khi không tìm thấy
+
+        try {
+            Connection connection = Getconnection.getConnection();
+            String query = "SELECT ID FROM Loai WHERE TenLoai = ?";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setString(1, tenLoai);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                loaiID = rs.getInt("ID");
+            }
+
+            rs.close();
+            pstmt.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Xử lý ngoại lệ hoặc thông báo lỗi nếu cần
+        }
+
+        return loaiID;
+    }
+
 }

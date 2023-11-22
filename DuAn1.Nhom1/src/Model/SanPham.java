@@ -214,5 +214,14 @@ public class SanPham {
     public void setTenSize(String TenSize) {
         this.TenSize = TenSize;
     }
+    private int loaiKM;
+
+    public int getLoaiKM() {
+        return loaiKM;
+    }
+
+    public void setLoaiKM(int loaiKM) {
+        this.loaiKM = loaiKM;
+    }
 
 }
