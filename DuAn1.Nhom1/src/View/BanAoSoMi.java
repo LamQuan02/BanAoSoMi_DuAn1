@@ -45,6 +45,11 @@ import java.util.Comparator;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.RowFilter;
+import javax.swing.SwingUtilities;
+import javax.swing.table.TableRowSorter;
 
 public class BanAoSoMi extends javax.swing.JFrame {
 
@@ -109,6 +114,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
         mnThoat = new javax.swing.JLabel();
         mnLS = new javax.swing.JLabel();
         mnNV = new javax.swing.JLabel();
+        mnTKhoan1 = new javax.swing.JLabel();
         home = new javax.swing.JPanel();
         thongke = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
@@ -324,7 +330,6 @@ public class BanAoSoMi extends javax.swing.JFrame {
         container.setBackground(new java.awt.Color(255, 255, 255));
 
         menu.setBackground(new java.awt.Color(255, 255, 255));
-        menu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Image/Logo.jpg"))); // NOI18N
 
@@ -362,7 +367,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
         });
 
         mnTKhoan.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        mnTKhoan.setText("            Tài khoản");
+        mnTKhoan.setText("          Đổi mật khẩu");
         mnTKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mnTKhoanMouseClicked(evt);
@@ -370,7 +375,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
         });
 
         mnThoat.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        mnThoat.setText("               Thoát");
+        mnThoat.setText("Đăng xuất");
         mnThoat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 mnThoatMouseClicked(evt);
@@ -396,6 +401,14 @@ public class BanAoSoMi extends javax.swing.JFrame {
             }
         });
 
+        mnTKhoan1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        mnTKhoan1.setText("            Tài khoản");
+        mnTKhoan1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnTKhoan1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
         menu.setLayout(menuLayout);
         menuLayout.setHorizontalGroup(
@@ -405,13 +418,21 @@ public class BanAoSoMi extends javax.swing.JFrame {
             .addComponent(mnHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(mnVC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(mnTKhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(mnThoat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(menuLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1)
                 .addContainerGap(33, Short.MAX_VALUE))
             .addComponent(mnLS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(mnNV, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
+            .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(menuLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(mnTKhoan1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         menuLayout.setVerticalGroup(
             menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,11 +451,16 @@ public class BanAoSoMi extends javax.swing.JFrame {
                 .addComponent(mnLS, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(mnNV, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(mnTKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(mnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mnThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
+            .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuLayout.createSequentialGroup()
+                    .addContainerGap(416, Short.MAX_VALUE)
+                    .addComponent(mnTKhoan1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(195, 195, 195)))
         );
 
         home.setLayout(new java.awt.CardLayout());
@@ -519,7 +545,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jLabel48, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(rdoBangCTDT, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -601,7 +627,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addGap(0, 241, Short.MAX_VALUE)
+                .addGap(0, 243, Short.MAX_VALUE)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel16Layout.setVerticalGroup(
@@ -783,6 +809,11 @@ public class BanAoSoMi extends javax.swing.JFrame {
             tblThongTinSP.getColumnModel().getColumn(7).setResizable(false);
         }
 
+        txtTim1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTim1MouseClicked(evt);
+            }
+        });
         txtTim1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTim1ActionPerformed(evt);
@@ -863,7 +894,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jScrollPane6))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1155,7 +1186,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane13)
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1470,7 +1501,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
             hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(hoadonLayout.createSequentialGroup()
                 .addGroup(hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
                     .addGroup(hoadonLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(txtTimkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1506,7 +1537,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
         voucher.setLayout(voucherLayout);
         voucherLayout.setHorizontalGroup(
             voucherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1008, Short.MAX_VALUE)
+            .addGap(0, 1010, Short.MAX_VALUE)
         );
         voucherLayout.setVerticalGroup(
             voucherLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1823,7 +1854,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
         nhanvienLayout.setHorizontalGroup(
             nhanvienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(nhanvienLayout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2031,7 +2062,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
                     .addComponent(tblLichS, javax.swing.GroupLayout.DEFAULT_SIZE, 705, Short.MAX_VALUE)
                     .addComponent(jScrollPane11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane12))
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
         );
         lichsuLayout.setVerticalGroup(
             lichsuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2179,7 +2210,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2194,7 +2225,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
                     .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout containerLayout = new javax.swing.GroupLayout(container);
@@ -2206,7 +2237,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, 1008, Short.MAX_VALUE)
+                    .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         containerLayout.setVerticalGroup(
@@ -2475,7 +2506,10 @@ public class BanAoSoMi extends javax.swing.JFrame {
     }//GEN-LAST:event_tblLichSMouseClicked
 
     private void mnThoatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnThoatMouseClicked
-        init();
+        DangNhapJFrame dangNhapJFrame = new DangNhapJFrame();
+        dangNhapJFrame.show();
+        dispose();
+        
     }//GEN-LAST:event_mnThoatMouseClicked
 
     private void rdoChatLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoChatLieuActionPerformed
@@ -2584,29 +2618,29 @@ public class BanAoSoMi extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTim1KeyReleased
 
     private void txtTimkiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTimkiemKeyReleased
-        String keyword = txtTimkiem.getText().trim();
-        if (!keyword.isEmpty()) {
-            // Lọc dữ liệu từ cơ sở dữ liệu dựa trên từ khóa keyword
-            List<SanPham> filteredProducts = dao.searchProductsByKeywordSP(keyword);
-
-            // Hiển thị kết quả tìm kiếm trên JTable
-            DefaultTableModel model = (DefaultTableModel) tblDanhSachSP.getModel();
-            model.setRowCount(0); // Xóa dữ liệu cũ trong table
-            for (SanPham sp : filteredProducts) {
-                Object[] row = {
-                    sp.getMaSp(),
-                    sp.getTenSp(),
-                    sp.getMauSac(),
-                    sp.getChatLieu(),
-                    sp.getSize(),
-                    sp.getSoLuong(),
-                    sp.getGia()
-                };
-                model.addRow(row);
-            }
-        } else {
-            // Xử lý trường hợp không có từ khóa tìm kiếm
-        }
+//        String keyword = txtTimkiem.getText().trim();
+//        if (!keyword.isEmpty()) {
+//            // Lọc dữ liệu từ cơ sở dữ liệu dựa trên từ khóa keyword
+//            List<SanPham> filteredProducts = dao.searchProductsByKeywordSP(keyword);
+//
+//            // Hiển thị kết quả tìm kiếm trên JTable
+//            DefaultTableModel model = (DefaultTableModel) tblDanhSachSP.getModel();
+//            model.setRowCount(0); // Xóa dữ liệu cũ trong table
+//            for (SanPham sp : filteredProducts) {
+//                Object[] row = {
+//                    sp.getMaSp(),
+//                    sp.getTenSp(),
+//                    sp.getMauSac(),
+//                    sp.getChatLieu(),
+//                    sp.getSize(),
+//                    sp.getSoLuong(),
+//                    sp.getGia()
+//                };
+//                model.addRow(row);
+//            }
+//        } else {
+//            // Xử lý trường hợp không có từ khóa tìm kiếm
+//        }
     }//GEN-LAST:event_txtTimkiemKeyReleased
 
     private void btnAnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnActionPerformed
@@ -2683,6 +2717,18 @@ public class BanAoSoMi extends javax.swing.JFrame {
     private void mnThoatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnThoatMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_mnThoatMouseEntered
+
+    private void txtTim1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTim1MouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tblThongTinSP.getModel();
+        TableRowSorter<DefaultTableModel> obj = new TableRowSorter<>(model);
+        tblThongTinSP.setRowSorter(obj);
+        obj.setRowFilter(RowFilter.regexFilter(txtTim1.getText()));
+    }//GEN-LAST:event_txtTim1MouseClicked
+
+    private void mnTKhoan1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnTKhoan1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnTKhoan1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -2835,6 +2881,7 @@ public class BanAoSoMi extends javax.swing.JFrame {
     private javax.swing.JLabel mnSP;
     private javax.swing.JLabel mnTK;
     private javax.swing.JLabel mnTKhoan;
+    private javax.swing.JLabel mnTKhoan1;
     private javax.swing.JLabel mnThoat;
     private javax.swing.JLabel mnVC;
     private javax.swing.JPanel nhanvien;
@@ -2904,9 +2951,16 @@ public class BanAoSoMi extends javax.swing.JFrame {
     private javax.swing.JPanel voucher;
     // End of variables declaration//GEN-END:variables
 //////////////////////// ĐĂNG NHẬP //////////////////////////////////////
+    
+    
+  //  DangNhapJFrame dangNhapDialog = new DangNhapJFrame();
+  //  JDialog DangNhapDialog = new JDialog(new Dangnhap1(this, true));
     private void moDialogDangNhap() {
-        Dangnhap1 dangNhapDialog = new Dangnhap1(this, true); // Khởi tạo đối tượng DangNhap
-        dangNhapDialog.setVisible(true); // Hiển thị dialog
+        
+        //DangNhapJFrame dangNhapDialog = new DangNhapJFrame(); // Khởi tạo đối tượng DangNhap
+       // dangNhapDialog.show();
+//DangNhapDialog.setVisible(true); // Hiển thị dialog
+        
         // Sau khi người dùng đăng nhập thành công và đóng dialog, lấy MaNV từ dialog
         // Cập nhật giá trị txtMaNV trong JFrame
         if (Auth.isLogin() && Auth.User != null) {
