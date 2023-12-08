@@ -8,11 +8,6 @@ import Model.TaiKhoan;
 import Repository.Auth;
 import Repository.MsgBox;
 import Service.TaiKhoanService;
-<<<<<<< HEAD
-=======
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
->>>>>>> 868a223ed098f645ea4598d37452b661bd62ae27
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
@@ -29,6 +24,8 @@ public class DangNhapJFrame extends javax.swing.JFrame {
     public DangNhapJFrame() {
         initComponents();
         init();
+        ChaoJDialog chao = new ChaoJDialog(this, true);
+        chao.setVisible(true);
     }
 
     /**
@@ -57,10 +54,6 @@ public class DangNhapJFrame extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-<<<<<<< HEAD
-=======
-        setTitle("Đăng nhập");
->>>>>>> 868a223ed098f645ea4598d37452b661bd62ae27
         setPreferredSize(new java.awt.Dimension(751, 494));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -187,7 +180,7 @@ public class DangNhapJFrame extends javax.swing.JFrame {
 
     private void lblQuenMKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblQuenMKMouseClicked
         // TODO add your handling code here:
-            new QuenMKJdialog(this, true).setVisible(true);
+        new QuenMKJdialog(this, true).setVisible(true);
     }//GEN-LAST:event_lblQuenMKMouseClicked
 
     private void lblDisableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDisableMouseClicked
@@ -211,7 +204,6 @@ public class DangNhapJFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dangNhap();
-      
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -293,11 +285,6 @@ public class DangNhapJFrame extends javax.swing.JFrame {
             MsgBox.alert(this, "Sai mật khẩu!");
         } else {
             Auth.User = nv;
-<<<<<<< HEAD
-            ChaoJDialog chao = new ChaoJDialog(this, true);
-            chao.setVisible(true);
-=======
->>>>>>> 868a223ed098f645ea4598d37452b661bd62ae27
             BanAoSoMi banAoSoMi = new BanAoSoMi();
             banAoSoMi.show();
             dispose();

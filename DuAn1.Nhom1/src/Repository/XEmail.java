@@ -29,13 +29,8 @@ public class XEmail {
         properties.put("mail.smtp.host", "smtp-mail.outlook.com");
         properties.put("mail.smtp.port", "587");
 
-<<<<<<< HEAD
         String username = "hoangchu25@outlook.com";
         String password = "chuchu11";
-=======
-        String username = "hoanhtran26@outlook.com";
-        String password = "26092000aA";
->>>>>>> 868a223ed098f645ea4598d37452b661bd62ae27
         
         // Tạo đối tượng Session
         Session session = Session.getInstance(properties, 
